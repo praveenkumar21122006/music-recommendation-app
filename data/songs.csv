@@ -1,0 +1,101 @@
+id,title,artist,genre,mood,year,danceability,energy,valence,tempo,popularity
+1,Blinding Lights,The Weeknd,Synth-pop,Energetic,2020,0.73,0.86,0.57,171,95
+2,Save Your Tears,The Weeknd,Synth-pop,Melancholic,2020,0.68,0.83,0.64,118,92
+3,Levitating,Dua Lipa,Disco-Pop,Happy,2020,0.83,0.82,0.84,103,94
+4,Don't Start Now,Dua Lipa,Disco-Pop,Energetic,2019,0.79,0.79,0.68,124,90
+5,Watermelon Sugar,Harry Styles,Pop,Happy,2019,0.55,0.72,0.76,95,88
+6,Adore You,Harry Styles,Pop,Romantic,2019,0.68,0.68,0.68,88,84
+7,Bad Guy,Billie Eilish,Electropop,Dark,2019,0.7,0.56,0.35,135,91
+8,Everything I Wanted,Billie Eilish,Electropop,Melancholic,2019,0.61,0.24,0.18,120,85
+9,Circles,Post Malone,Pop-Rap,Melancholic,2019,0.76,0.76,0.55,120,90
+10,Sunflower,Post Malone & Swae Lee,Pop-Rap,Happy,2018,0.86,0.52,0.91,90,93
+11,Shape of You,Ed Sheeran,Pop,Romantic,2017,0.83,0.65,0.93,96,96
+12,Perfect,Ed Sheeran,Pop,Romantic,2017,0.6,0.45,0.17,63,89
+13,Someone You Loved,Lewis Capaldi,Pop,Melancholic,2018,0.5,0.45,0.45,110,92
+14,Dance Monkey,Tones and I,Pop,Energetic,2019,0.59,0.59,0.54,98,91
+15,Stay,The Kid LAROI & Justin Bieber,Pop,Melancholic,2021,0.66,0.71,0.48,170,94
+16,Peaches,Justin Bieber,Pop,Happy,2021,0.67,0.61,0.72,90,87
+17,As It Was,Harry Styles,Pop,Happy,2022,0.62,0.87,0.68,174,95
+18,About Damn Time,Lizzo,Funk-Pop,Energetic,2022,0.83,0.81,0.88,109,88
+19,First Class,Jack Harlow,Hip-Hop,Chill,2022,0.92,0.59,0.65,101,85
+20,Heat Waves,Glass Animals,Indie Pop,Melancholic,2020,0.76,0.53,0.53,80,93
+21,Glimpse of Us,Joji,R&B,Melancholic,2022,0.44,0.41,0.27,118,87
+22,Die For You,The Weeknd & Ariana Grande,R&B,Romantic,2016,0.48,0.59,0.44,96,90
+23,Cruel Summer,Taylor Swift,Pop,Energetic,2019,0.55,0.72,0.58,170,92
+24,Anti-Hero,Taylor Swift,Pop,Melancholic,2022,0.64,0.59,0.64,97,93
+25,Flowers,Miley Cyrus,Pop,Energetic,2023,0.71,0.68,0.66,118,94
+26,Calm Down,Rema & Selena Gomez,Afrobeats,Romantic,2022,0.82,0.65,0.76,98,90
+27,Kill Bill,SZA,R&B,Melancholic,2022,0.64,0.64,0.46,88,92
+28,Snooze,SZA,R&B,Romantic,2022,0.58,0.54,0.56,95,89
+29,Creepin',Metro Boomin & The Weeknd,Hip-Hop,Dark,2022,0.62,0.69,0.31,98,88
+30,Under The Influence,Chris Brown,R&B,Romantic,2019,0.66,0.63,0.68,99,86
+31,Unholy,Sam Smith & Kim Petras,Electropop,Dark,2022,0.71,0.71,0.52,131,89
+32,I'm Good,David Guetta & Bebe Rexha,Dance,Energetic,2022,0.73,0.85,0.66,134,88
+33,Tití Me Preguntó,Bad Bunny,Reggaeton,Energetic,2022,0.65,0.79,0.62,107,93
+34,Moscow Mule,Bad Bunny,Reggaeton,Chill,2022,0.72,0.56,0.42,95,88
+35,Me Porto Bonito,Bad Bunny & Chencho Corleone,Reggaeton,Happy,2022,0.92,0.71,0.86,92,91
+36,APT.,ROSÉ & Bruno Mars,Pop,Energetic,2024,0.76,0.82,0.88,150,92
+37,Espresso,Sabrina Carpenter,Pop,Happy,2024,0.78,0.77,0.89,103,90
+38,Birds of a Feather,Billie Eilish,Pop,Melancholic,2024,0.58,0.49,0.32,115,91
+39,Beautiful Things,Benson Boone,Pop,Energetic,2024,0.55,0.85,0.65,82,89
+40,Not Like Us,Kendrick Lamar,Hip-Hop,Energetic,2024,0.84,0.75,0.58,101,95
+41,Lose Yourself,Eminem,Hip-Hop,Motivational,2002,0.69,0.86,0.24,171,94
+42,God's Plan,Drake,Hip-Hop,Chill,2018,0.75,0.45,0.59,77,92
+43,HUMBLE.,Kendrick Lamar,Hip-Hop,Energetic,2017,0.72,0.85,0.37,150,91
+44,Sicko Mode,Travis Scott,Hip-Hop,Dark,2018,0.56,0.82,0.45,155,90
+45,Bohemian Rhapsody,Queen,Rock,Dramatic,1975,0.39,0.56,0.33,72,95
+46,Stairway to Heaven,Led Zeppelin,Rock,Epic,1971,0.31,0.38,0.19,82,89
+47,Hotel California,Eagles,Rock,Melancholic,1976,0.41,0.55,0.21,75,92
+48,Smells Like Teen Spirit,Nirvana,Rock,Energetic,1991,0.54,0.92,0.43,117,91
+49,Creep,Radiohead,Rock,Melancholic,1992,0.43,0.47,0.22,92,88
+50,Wonderwall,Oasis,Rock,Melancholic,1995,0.39,0.61,0.46,87,87
+51,Mr. Brightside,The Killers,Rock,Energetic,2003,0.66,0.88,0.68,148,90
+52,Take Me Out,Franz Ferdinand,Rock,Energetic,2004,0.63,0.89,0.77,138,85
+53,Do I Wanna Know?,Arctic Monkeys,Rock,Dark,2013,0.55,0.75,0.27,85,90
+54,Believer,Imagine Dragons,Rock,Motivational,2017,0.77,0.78,0.67,125,89
+55,Thunder,Imagine Dragons,Rock,Energetic,2017,0.61,0.8,0.59,167,87
+56,Shivers,Ed Sheeran,Pop,Happy,2021,0.79,0.8,0.82,141,88
+57,Bad Habits,Ed Sheeran,Pop,Energetic,2021,0.84,0.86,0.61,126,87
+58,Love Story,Taylor Swift,Pop,Romantic,2008,0.61,0.65,0.49,119,90
+59,Blank Space,Taylor Swift,Pop,Melancholic,2014,0.51,0.67,0.48,96,89
+60,Starboy,The Weeknd & Daft Punk,Synth-pop,Dark,2016,0.68,0.68,0.48,186,91
+61,The Hills,The Weeknd,R&B,Dark,2015,0.58,0.82,0.27,113,90
+62,Earned It,The Weeknd,R&B,Romantic,2014,0.46,0.49,0.31,101,88
+63,Wildest Dreams,Taylor Swift,Pop,Romantic,2014,0.55,0.58,0.37,117,86
+64,We Found Love,Rihanna & Calvin Harris,Dance,Happy,2011,0.73,0.85,0.64,128,90
+65,Lean On,Major Lazer & DJ Snake,Dance,Happy,2015,0.72,0.72,0.66,100,89
+66,Closer,The Chainsmokers & Halsey,Dance,Melancholic,2016,0.75,0.73,0.39,95,91
+67,Something Just Like This,The Chainsmokers & Coldplay,Dance,Happy,2017,0.62,0.82,0.75,103,88
+68,Faded,Alan Walker,Dance,Melancholic,2015,0.55,0.69,0.25,90,87
+69,Alone,Marshmello,Dance,Energetic,2016,0.7,0.78,0.61,142,85
+70,Attention,Charlie Puth,Pop,Energetic,2017,0.84,0.65,0.66,100,88
+71,Light Switch,Charlie Puth,Pop,Happy,2022,0.81,0.72,0.9,96,84
+72,WATERMANE,The Kid LAROI,Hip-Hop,Melancholic,2020,0.68,0.62,0.35,130,83
+73,Despacito,Luis Fonsi & Daddy Yankee,Reggaeton,Romantic,2017,0.65,0.8,0.71,89,96
+74,Bailando,Enrique Iglesias,Reggaeton,Romantic,2014,0.69,0.83,0.66,128,89
+75,Havana,Camila Cabello & Young Thug,Pop,Romantic,2017,0.77,0.62,0.84,105,91
+76,Senorita,Shawn Mendes & Camila Cabello,Pop,Romantic,2019,0.76,0.55,0.74,117,89
+77,Señorita_unplugged,Shawn Mendes,Pop,Melancholic,2018,0.52,0.48,0.42,108,82
+78,Glimpse,James Arthur,Pop,Melancholic,2016,0.48,0.52,0.28,110,84
+79,Let Her Go,Passenger,Pop,Melancholic,2012,0.46,0.44,0.29,74,88
+80,Counting Stars,OneRepublic,Pop,Motivational,2013,0.68,0.76,0.59,122,90
+81,Apologize,OneRepublic & Timbaland,Pop,Melancholic,2007,0.48,0.7,0.44,104,89
+82,Radioactive,Imagine Dragons,Rock,Dark,2012,0.58,0.89,0.48,136,90
+83,Demons,Imagine Dragons,Rock,Melancholic,2013,0.43,0.62,0.28,108,87
+84,Numb,Linkin Park,Rock,Dark,2003,0.49,0.86,0.22,110,91
+85,In The End,Linkin Park,Rock,Melancholic,2001,0.56,0.86,0.39,105,92
+86,Crawling,Linkin Park,Rock,Dark,2000,0.44,0.76,0.18,92,86
+87,Let Me Down Slowly,Alec Benjamin,Pop,Melancholic,2018,0.67,0.58,0.36,100,87
+88,I Love You 3000,Stephanie Poetri,Pop,Romantic,2019,0.68,0.52,0.72,100,84
+89,Drivers License,Olivia Rodrigo,Pop,Melancholic,2021,0.41,0.44,0.18,144,91
+90,Good 4 U,Olivia Rodrigo,Pop,Energetic,2021,0.58,0.88,0.56,166,90
+91,Deja Vu,Olivia Rodrigo,Pop,Melancholic,2021,0.57,0.62,0.42,93,86
+92,Vampire,Olivia Rodrigo,Pop,Dark,2023,0.51,0.72,0.31,139,88
+93,Golden Hour,JVKE,Pop,Romantic,2022,0.61,0.42,0.66,94,87
+94,As The World Caves In,Sarah Cothran,Pop,Melancholic,2020,0.39,0.28,0.12,72,84
+95,Summertime Sadness,Lana Del Rey,Pop,Melancholic,2012,0.46,0.61,0.22,93,88
+96,Chemtrails Over The Country Club,Lana Del Rey,Pop,Melancholic,2021,0.42,0.35,0.19,89,82
+97,Here's Your Perfect,Jamie Miller,Pop,Melancholic,2021,0.54,0.52,0.31,82,83
+98,Arcade,Duncan Laurence,Pop,Melancholic,2018,0.51,0.43,0.17,71,86
+99,Kesariya,Pritam & Arijit Singh,Bollywood,Romantic,2022,0.58,0.62,0.68,84,89
+100,Tum Hi Ho,Arijit Singh,Bollywood,Romantic,2013,0.45,0.49,0.39,78,90

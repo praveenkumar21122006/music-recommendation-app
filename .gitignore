@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.env
+.DS_Store
+.idea/
+.vscode/
+nohup.out
+*.log
+/tmp/
+.opencode/

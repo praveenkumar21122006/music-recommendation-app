@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Musica — Personalized Music Recommendations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --card:#16161f;
+  --card-hover:#1e1e2e;
+  --border:#262635;
+  --primary:#7c5cfc;
+  --primary-2:#4f46e5;
+  --accent:#ff3b82;
+  --text:#f5f5ff;
+  --muted:#9a9ab0;
+  --success:#22c55e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:20;background:rgba(10,10,15,0.8);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px}
+.logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;font-size:18px}
+.nav-stats{display:flex;gap:18px;font-size:13px;color:var(--muted)}
+.nav-stats b{color:var(--text);font-size:15px}
+.hero{padding:42px 0 28px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:28px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:44px;line-height:1.05;letter-spacing:-0.03em}
+.hero h1 span{background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{margin-top:14px;color:var(--muted);font-size:15.5px;line-height:1.6;max-width:560px}
+.hero-card{background:linear-gradient(135deg,rgba(124,92,252,0.15),rgba(255,59,130,0.12));border:1px solid var(--border);border-radius:20px;padding:22px}
+.hero-card h3{font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px}
+.pill{padding:7px 12px;border-radius:999px;background:var(--card);border:1px solid var(--border);font-size:13px;cursor:pointer;transition:.15s}
+.pill.active{background:var(--primary);border-color:var(--primary);color:white}
+.pill:hover{border-color:var(--primary)}
+.main-grid{display:grid;grid-template-columns:320px 1fr;gap:22px;padding-bottom:40px}
+@media(max-width:960px){.main-grid{grid-template-columns:1fr}}
+.sidebar{position:sticky;top:76px;height:fit-content;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+.card h3{font-size:13px;letter-spacing:0.07em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}
+.search-wrap{position:relative}
+.search-wrap input{width:100%;background:#0f0f17;border:1px solid var(--border);border-radius:10px;padding:10px 12px 10px 36px;color:var(--text);font-size:14px;outline:none}
+.search-wrap input:focus{border-color:var(--primary)}
+.search-wrap span{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:0.6}
+.select{width:100%;background:#0f0f17;border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px;outline:none}
+.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:600;font-size:14px;cursor:pointer;transition:.15s}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:white;width:100%}
+.btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--primary)}
+.btn-sm{padding:6px 10px;font-size:12.5px;border-radius:999px}
+.liked-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow:auto}
+.liked-item{display:flex;align-items:center;gap:10px;background:#0f0f17;border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+.liked-item img{width:38px;height:38px;border-radius:8px;object-fit:cover;background:#222}
+.liked-meta{flex:1;min-width:0}
+.liked-meta b{font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.liked-meta span{font-size:12px;color:var(--muted)}
+.icon-btn{width:28px;height:28px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center}
+.icon-btn:hover{color:var(--accent);border-color:var(--accent)}
+.content{display:flex;flex-direction:column;gap:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-weight:600;font-size:13px;cursor:pointer}
+.tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.song-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.song-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:.18s;position:relative}
+.song-card:hover{transform:translateY(-3px);border-color:#2e2e45;background:var(--card-hover)}
+.song-cover{height:118px;background:linear-gradient(135deg,#1a1a2e,#2a1a3a);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;overflow:hidden}
+.song-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.45))}
+.song-cover span{position:relative;z-index:1}
+.song-body{padding:12px 14px}
+.song-title{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-artist{font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{font-size:11px;padding:4px 8px;border-radius:999px;background:#0f0f17;border:1px solid var(--border);color:var(--muted)}
+.badge.mood{border-color:rgba(124,92,252,0.35);color:#b7a7ff;background:rgba(124,92,252,0.12)}
+.badge.genre{border-color:rgba(255,59,130,0.3);color:#ff8fb7;background:rgba(255,59,130,0.1)}
+.song-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+.pop{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.heart{width:32px;height:32px;border-radius:999px;border:1px solid var(--border);background:#0f0f17;display:grid;place-items:center;cursor:pointer;font-size:14px;transition:.15s}
+.heart.liked{background:var(--accent);border-color:var(--accent);color:white}
+.heart:hover{border-color:var(--accent)}
+.reco-header{padding:14px 16px;background:linear-gradient(135deg,rgba(124,92,252,0.14),rgba(255,59,130,0.10));border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.reco-header h2{font-size:18px}
+.reco-header p{font-size:13px;color:var(--muted)}
+.empty{padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:16px;background:rgba(255,255,255,0.02)}
+.reason{margin-top:8px;font-size:11.5px;color:#b7a7ff;background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.2);padding:6px 8px;border-radius:8px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,0.3);opacity:0;pointer-events:none;transition:.25s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="container nav-inner">
+    <div class="logo"><div class="logo-badge">♫</div> Musica</div>
+    <div class="nav-stats" id="navStats"></div>
+  </div>
+</nav>
+
+<div class="container">
+  <section class="hero">
+    <div>
+      <h1>Discover music<br>that <span>gets you.</span></h1>
+      <p>Personalized recommendations powered by hybrid filtering — content-based + collaborative signals on genre, mood, and audio features. Like songs, tune your vibe, and get instant tailored picks.</p>
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-ghost" onclick="document.getElementById('songGrid').scrollIntoView({behavior:'smooth'})">Browse songs →</button>
+        <button class="btn btn-ghost" onclick="autoDemo()">✨ Try demo likes</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Tune your preferences</h3>
+      <div style="display:grid;gap:12px">
+        <div>
+          <label style="font-size:12px;color:var(--muted)">Filter by genre</label>
+          <select id="genreSelect" class="select" style="margin-top:6px"><option value="">All genres</option></select>
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--muted)">Filter by mood</label>
+          <select id="moodSelect" class="select" style="margin-top:6px"><option value="">All moods</option></select>
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--muted)">Quick mood vibe</label>
+          <div class="pill-row" id="moodPills" style="margin-top:6px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="main-grid">
+    <aside class="sidebar">
+      <div class="card">
+        <h3>Search <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:12px;color:var(--muted)" id="songCount"></span></h3>
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="searchInput" placeholder="Search title, artist, genre..."/>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn btn-ghost btn-sm" style="flex:1" onclick="clearFilters()">Clear</button>
+          <button class="btn btn-ghost btn-sm" style="flex:1" onclick="loadSongs()">Search</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Your likes <span id="likeCount" style="background:var(--primary);color:white;padding:2px 8px;border-radius:999px;font-size:11px">0</span></h3>
+        <div id="likedList" class="liked-list">
+          <div class="empty" style="padding:16px">No likes yet — tap ♥ on any song to personalize.</div>
+        </div>
+        <button class="btn btn-primary" style="margin-top:12px" onclick="getRecommendations()">✨ Get Recommendations</button>
+        <button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="clearLikes()">Clear likes</button>
+      </div>
+
+      <div class="card" style="font-size:12.5px;color:var(--muted);line-height:1.6">
+        <h3>How it works</h3>
+        <p><b style="color:var(--text)">Content-based:</b> TF-IDF on genre/artist/mood + cosine similarity on danceability, energy, valence, tempo, popularity.</p>
+        <p style="margin-top:8px"><b style="color:var(--text)">Hybrid boost:</b> 60% text + 40% audio features + 10% popularity + mood/genre re-ranking.</p>
+        <p style="margin-top:8px"><b style="color:var(--text)">Cold start:</b> Top popular & diverse picks when no likes.</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="reco-header" id="recoHeader" style="display:none">
+        <div>
+          <h2>Recommended for you ✨</h2>
+          <p id="recoSub">Based on your likes</p>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="clearReco()">✕ Close</button>
+      </div>
+      <div id="recoGrid" class="song-grid" style="display:none"></div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div class="tabs">
+          <button class="tab active" data-tab="all" onclick="setTab('all')">All songs</button>
+          <button class="tab" data-tab="trending" onclick="setTab('trending')">Trending 🔥</button>
+          <button class="tab" data-tab="chill" onclick="setTab('chill')">Chill</button>
+          <button class="tab" data-tab="energetic" onclick="setTab('energetic')">Energetic</button>
+        </div>
+        <span id="resultInfo" style="font-size:12.5px;color:var(--muted)"></span>
+      </div>
+
+      <div id="songGrid" class="song-grid"></div>
+      <div id="emptyState" class="empty" style="display:none">No songs found. Try another search.</div>
+    </main>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const API = '';
+let allSongs = [];
+let liked = JSON.parse(localStorage.getItem('musica_likes')||'[]');
+let currentTab = 'all';
+let selectedMood = '';
+
+const emojiForGenre = {
+  'Pop':'🎤','Synth-pop':'🌃','Disco-Pop':'🪩','Electropop':'🎛️','Pop-Rap':'🎧','R&B':'🎷','Hip-Hop':'🎤','Rock':'🎸','Dance':'🪩','Afrobeats':'🥁','Reggaeton':'🔥','Funk-Pop':'🕺','Indie Pop':'🌿','Bollywood':'🎬'
+};
+const moodEmoji = {'Happy':'😊','Energetic':'⚡','Melancholic':'🌙','Romantic':'❤️','Chill':'🍃','Dark':'🌑','Dramatic':'🎭','Epic':'🏔️','Motivational':'💪'};
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+async function init(){
+  await Promise.all([loadGenresMoods(), loadStats(), loadSongs()]);
+  renderLikes();
+}
+
+async function loadStats(){
+  const r=await fetch('/api/stats'); const s=await r.json();
+  document.getElementById('navStats').innerHTML = `<span><b>${s.total_songs}</b> songs</span><span><b>${s.total_artists}</b> artists</span><span><b>${s.total_genres}</b> genres</span>`;
+}
+async function loadGenresMoods(){
+  const [g,m]=await Promise.all([fetch('/api/genres').then(r=>r.json()), fetch('/api/moods').then(r=>r.json())]);
+  const gs=document.getElementById('genreSelect');
+  g.forEach(x=>{ const o=document.createElement('option'); o.value=x; o.textContent=x; gs.appendChild(o);});
+  const ms=document.getElementById('moodSelect');
+  m.forEach(x=>{ const o=document.createElement('option'); o.value=x; o.textContent=x; ms.appendChild(o);});
+  const pills=document.getElementById('moodPills');
+  m.slice(0,6).forEach(x=>{
+    const b=document.createElement('button');
+    b.className='pill'; b.textContent=(moodEmoji[x]||'♪')+' '+x;
+    b.onclick=()=>{ selectedMood = selectedMood===x ? '' : x; document.querySelectorAll('#moodPills .pill').forEach(p=>p.classList.remove('active')); if(selectedMood) b.classList.add('active'); document.getElementById('moodSelect').value=selectedMood; loadSongs(); };
+    pills.appendChild(b);
+  });
+}
+
+async function loadSongs(){
+  const q=document.getElementById('searchInput').value.trim();
+  const genre=document.getElementById('genreSelect').value;
+  const mood=document.getElementById('moodSelect').value || selectedMood;
+  let url='/api/songs?limit=60';
+  if(q) url+=`&q=${encodeURIComponent(q)}`;
+  if(genre) url+=`&genre=${encodeURIComponent(genre)}`;
+  if(mood) url+=`&mood=${encodeURIComponent(mood)}`;
+  // tab filters
+  if(currentTab==='trending'){ /* sort by popularity already */ }
+  if(currentTab==='chill') url+=`&mood=Chill`;
+  if(currentTab==='energetic') url+=`&mood=Energetic`;
+  const r=await fetch(url); const data=await r.json();
+  allSongs=data;
+  document.getElementById('songCount').textContent = `${data.length} found`;
+  document.getElementById('resultInfo').textContent = q||genre||mood ? `Filtered • ${data.length} results` : `${data.length} songs`;
+  renderSongs(data, document.getElementById('songGrid'));
+  document.getElementById('emptyState').style.display = data.length? 'none':'block';
+}
+
+function renderSongs(songs, container){
+  container.innerHTML='';
+  songs.forEach(s=>{
+    const isLiked = liked.includes(s.id);
+    const el=document.createElement('div'); el.className='song-card';
+    el.innerHTML=`
+      <div class="song-cover"><span>${emojiForGenre[s.genre]||'🎵'}</span></div>
+      <div class="song-body">
+        <div class="song-title" title="${s.title}">${s.title}</div>
+        <div class="song-artist">${s.artist} • ${s.year}</div>
+        <div class="song-meta">
+          <span class="badge genre">${s.genre}</span>
+          <span class="badge mood">${(moodEmoji[s.mood]||'')+' '+s.mood}</span>
+        </div>
+        ${s.reason?`<div class="reason">${s.reason} • ${(s.score||0)}</div>`:''}
+        <div class="song-footer">
+          <span class="pop">🔥 ${s.popularity} • ♫ ${s.tempo} BPM</span>
+          <button class="heart ${isLiked?'liked':''}" onclick="toggleLike(${s.id})">${isLiked?'♥':'♡'}</button>
+        </div>
+      </div>`;
+    // click card to see similar
+    el.querySelector('.song-cover').style.cursor='pointer';
+    el.querySelector('.song-cover').onclick=()=> showSimilar(s.id, s.title);
+    container.appendChild(el);
+  });
+}
+
+function toggleLike(id){
+  const idx=liked.indexOf(id);
+  if(idx>=0){ liked.splice(idx,1); toast('Removed from likes'); }
+  else { liked.push(id); toast('Added to likes ♥'); }
+  localStorage.setItem('musica_likes', JSON.stringify(liked));
+  renderLikes();
+  renderSongs(allSongs, document.getElementById('songGrid'));
+  // re-render reco if visible
+  const rg=document.getElementById('recoGrid');
+  if(rg.style.display!=='none' && rg.children.length){
+    // update heart states inside reco
+    [...rg.children].forEach(card=>{
+      const btn=card.querySelector('.heart');
+      const sid=parseInt(btn.getAttribute('onclick').match(/\d+/)[0]);
+      btn.classList.toggle('liked', liked.includes(sid));
+      btn.textContent= liked.includes(sid)?'♥':'♡';
+    });
+  }
+}
+
+function renderLikes(){
+  document.getElementById('likeCount').textContent=liked.length;
+  const list=document.getElementById('likedList');
+  if(!liked.length){ list.innerHTML=`<div class="empty" style="padding:16px">No likes yet — tap ♥ on any song to personalize.</div>`; return; }
+  // fetch details for liked ids
+  Promise.all(liked.map(id=> fetch(`/api/songs/${id}`).then(r=>r.ok?r.json():null))).then(songs=>{
+    songs=songs.filter(Boolean);
+    list.innerHTML='';
+    songs.forEach(s=>{
+      const row=document.createElement('div'); row.className='liked-item';
+      row.innerHTML=`<div style="width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,#2a2a40,#3a2040);display:grid;place-items:center">${emojiForGenre[s.genre]||'🎵'}</div>
+        <div class="liked-meta"><b>${s.title}</b><span>${s.artist}</span></div>
+        <button class="icon-btn" onclick="toggleLike(${s.id})">✕</button>`;
+      list.appendChild(row);
+    });
+  });
+}
+
+async function getRecommendations(){
+  const genre=document.getElementById('genreSelect').value || undefined;
+  const mood=document.getElementById('moodSelect').value || selectedMood || undefined;
+  const body={liked_ids: liked, history_ids:[], n:12, mood, genre};
+  const r=await fetch('/api/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const data=await r.json();
+  const grid=document.getElementById('recoGrid');
+  const header=document.getElementById('recoHeader');
+  header.style.display='flex'; grid.style.display='grid';
+  document.getElementById('recoSub').textContent = liked.length ? `Based on ${liked.length} liked songs${mood?` • mood: ${mood}`:''}${genre?` • genre: ${genre}`:''}` : `Top picks${mood?` • ${mood}`:''}${genre?` • ${genre}`:''} • Try liking songs for better results`;
+  renderSongs(data.recommendations, grid);
+  grid.scrollIntoView({behavior:'smooth', block:'start'});
+  toast(`Found ${data.count} recommendations ✨`);
+}
+
+function clearReco(){
+  document.getElementById('recoHeader').style.display='none';
+  document.getElementById('recoGrid').style.display='none';
+}
+function clearLikes(){ liked=[]; localStorage.setItem('musica_likes','[]'); renderLikes(); renderSongs(allSongs, document.getElementById('songGrid')); toast('Cleared likes'); clearReco(); }
+function clearFilters(){ document.getElementById('searchInput').value=''; document.getElementById('genreSelect').value=''; document.getElementById('moodSelect').value=''; selectedMood=''; document.querySelectorAll('#moodPills .pill').forEach(p=>p.classList.remove('active')); loadSongs(); }
+function setTab(t){
+  currentTab=t; document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab===t));
+  loadSongs();
+}
+async function showSimilar(id,title){
+  const r=await fetch(`/api/songs/${id}/similar?n=6`); const data=await r.json();
+  const grid=document.getElementById('recoGrid');
+  const header=document.getElementById('recoHeader');
+  header.style.display='flex'; grid.style.display='grid';
+  document.getElementById('recoSub').textContent=`Songs similar to "${title}"`;
+  // header title
+  header.querySelector('h2').textContent=`Similar to "${title}"`;
+  renderSongs(data, grid);
+  grid.scrollIntoView({behavior:'smooth'});
+}
+function autoDemo(){
+  liked=[1,3,11,40,73]; localStorage.setItem('musica_likes',JSON.stringify(liked)); renderLikes(); renderSongs(allSongs, document.getElementById('songGrid')); toast('Added 5 demo likes — now get recommendations!');
+}
+document.getElementById('searchInput').addEventListener('keydown',e=>{ if(e.key==='Enter') loadSongs(); });
+document.getElementById('genreSelect').addEventListener('change', loadSongs);
+document.getElementById('moodSelect').addEventListener('change', e=>{ selectedMood=e.target.value; document.querySelectorAll('#moodPills .pill').forEach(p=>{ p.classList.toggle('active', p.textContent.includes(selectedMood))}); loadSongs(); });
+init();
+</script>
+</body>
+</html>
